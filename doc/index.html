@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>chronoman Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.spacelab.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">chronoman</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-chronoman.html">chronoman</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-chronoman-Timer.html">chronoman~Timer</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+		<div class="col-sm-3 col-md-3">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>chronoman</h1><p>Utility class to simplify use of timers created by setTimeout.</p>
+<p><a href="http://badge.fury.io/js/chronoman"><img src="https://badge.fury.io/js/chronoman.png" alt="NPM version"></a>
+<a href="http://gruntjs.com/"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt"></a></p>
+<h2>Installation</h2><h3>Node</h3><pre class="prettyprint source"><code>npm install chronoman</code></pre><h3><a href="http://jspm.io">JSPM</a></h3><pre class="prettyprint source"><code>jspm install chronoman</code></pre><h3><a href="http://bower.io">Bower</a></h3><pre class="prettyprint source"><code>bower install chronoman</code></pre><h3><a href="http://jamjs.org">Jam</a></h3><pre class="prettyprint source"><code>jam install chronoman</code></pre><h3>AMD, &lt;script&gt;</h3><p>Use <code>dist/chronoman.js</code> or <code>dist/chronoman.min.js</code> (minified version).</p>
+<h2>Usage</h2><h3>ECMAScript 6/2015</h3><pre class="prettyprint source lang-js"><code>import Timer from &quot;chronoman&quot;;</code></pre><h3>Node, JSPM</h3><pre class="prettyprint source lang-js"><code>var Timer = require(&quot;chronoman&quot;);</code></pre><h3><a href="http://duojs.org">Duo</a></h3><pre class="prettyprint source lang-js"><code>var Timer = require(&quot;gamtiq/chronoman&quot;);</code></pre><h3>JSPM</h3><pre class="prettyprint source lang-js"><code>System.import(&quot;chronoman&quot;).then(function(Timer) {
+    ...
+});</code></pre><h3>Jam</h3><pre class="prettyprint source lang-js"><code>require([&quot;chronoman&quot;], function(Timer) {
+    ...
+});</code></pre><h3>AMD</h3><pre class="prettyprint source lang-js"><code>define([&quot;path/to/dist/chronoman.js&quot;], function(Timer) {
+    ...
+});</code></pre><h3>Bower, &lt;script&gt;</h3><pre class="prettyprint source lang-html"><code>&lt;!-- Use bower_components/chronoman/dist/chronoman.js if the library was installed by Bower -->
+&lt;script type=&quot;text/javascript&quot; src=&quot;path/to/dist/chronoman.js&quot;>&lt;/script>
+&lt;script type=&quot;text/javascript&quot;>
+    // сhronoman is available via Chronoman field of window object
+    var Timer = Chronoman;
+    ...
+&lt;/script></code></pre><h3>Example</h3><pre class="prettyprint source lang-js"><code>var nI = 0;
+
+var tmrOne = new Timer({
+    period: 1000,
+    action: function(timer) {
+        console.log(&quot;---> Timer one. &quot;, timer);
+        if (! tmrThree.isActive()) {
+            tmrThree.start();
+        }
+    }
+});
+
+var tmrTwo = new Timer();
+tmrTwo.setPeriod(2000)
+    .setRepeatQty(9)
+    .setPassToAction(true)
+    .setAction(function(timer) {
+        nI++;
+        console.log(&quot;Timer two. #&quot;, nI, timer);
+        tmrOne.setActive(nI % 2 === 1);
+    });
+
+var tmrThree = new Timer()
+                    .setPeriod(3000)
+                    .setRepeatTest(function() {
+                        return tmrTwo.isActive();
+                    });
+tmrThree.onExecute = function() {
+    console.log(&quot;* Timer three. #&quot;, this.getExecutionQty() + 1);
+};
+
+tmrTwo.start();</code></pre><h2>API</h2><p>See <code>doc</code> folder.</p>
+<h2>Inspiration</h2><p>This module is inspired by <a href="http://qooxdoo.org">qooxdoo</a>'s <code>qx.event.Timer</code> class.</p>
+<h2>Licence</h2><p>Copyright (c) 2013-2016 Denis Sikuler<br>Licensed under the MIT license.</p></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+<div class="modal fade" id="searchResults">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Search results</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright (c) 2013-2016 Denis Sikuler
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
+	
+		on 2016-07-19T00:18:33+03:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+<script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			var id = $( heading ).attr( "id" );
+			return id && id.replace(/\~/g, '-inner-').replace(/\./g, '-static-') || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		SearcherDisplay.init();
+	});
+</script>
+
+</body>
+</html>

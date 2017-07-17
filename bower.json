@@ -1,0 +1,31 @@
+{
+  "name": "chronoman",
+  "main": ["dist/chronoman.js", "dist/chronoman.min.js"],
+  "version": "1.0.0",
+  "homepage": "https://github.com/gamtiq/chronoman",
+  "authors": [
+    "Denis Sikuler"
+  ],
+  "description": "Utility class to simplify use of timers created by setTimeout.",
+  "keywords": [
+    "setTimeout",
+    "setInterval",
+    "time",
+    "timer",
+    "timeout",
+    "interval",
+    "period",
+    "periodic",
+    "management",
+    "utility",
+    "chrono"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
